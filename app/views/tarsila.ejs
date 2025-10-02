@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Museu Virtual: Tarsila</title>
+    <link rel="stylesheet" type="text/css" href="styles/tarsila.css" />
+</head>
+<body>
+	<h1>Obras da Tarsila do Amaral</h1>
+    <div class="paintings-container">
+		<% for (let i = 0; i < paintings.length; i++) { %>
+			<div class="card">
+				<div class="card-image-container">
+					<img src="<%= paintings[i].urlimagem %>" class="card-image" alt="<%= paintings[i].nome %>" />
+				</div>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title"> <%= paintings[i].nome %> </h5>
+				<p class="card-text"> <%= paintings[i].artista %> </p>
+			</div>
+		<%}%>
+	</div>
+</body>
+</html>

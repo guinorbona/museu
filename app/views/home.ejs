@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="utf-8" />
+	<title>Museu Virtual</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+</head>
+<body>
+	<h1>Museu Virtual</h1>
+	<div class="paintings-container">
+		<% for (let i = 0; i < paintings.length; i++) { %>
+			<div class="card">
+				<div class="card-image-container">
+					<img src="<%= paintings[i].urlimagem %>" class="card-image" alt="<%= paintings[i].nome %>" />
+				</div>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title"> <%= paintings[i].nome %> </h5>
+				<p class="card-text"> <%= paintings[i].artista %> </p>
+				
+
+				<% for (let j = 0; j < coments.length; j++) { %>
+					<p class="card-comment"> <%= coments[j].comentario %> </p>
+				<%}%>
+			</div>
+			<div>
+				<form action="http://localhost:3000/comentario?idobra=<%= paintings[i].id %>" method="post">
+					<label for="comentario">Comentário:</label><br>
+					<input type="text" id="comentario" name="comentario" placeholder="Comentário"><br>
+					<input type="submit" value="Comentar">
+				</form> 				  
+			</div>
+		<% } %>
+	</div>
+</body>
+</html>

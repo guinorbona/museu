@@ -1,0 +1,45 @@
+-- Cria o banco de dados 'museu' se ele não existir
+CREATE DATABASE IF NOT EXISTS museu;
+
+-- Seleciona o banco de dados 'museu' para uso
+USE museu;
+
+-- Cria a tabela 'obrasdearte' para armazenar informações sobre as obras
+CREATE TABLE `obrasdearte` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `artista` VARCHAR(45) NULL,
+  `ano` INT NOT NULL,
+  `urlimagem` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+-- Insere os dados das obras de arte na tabela
+-- O padrão SQL utiliza aspas simples (') para valores de texto
+INSERT INTO obrasdearte (nome, artista, ano, urlimagem) VALUES
+('Cafe', 'Cândido Portinari', 1935, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/portinariacafe.jpg?alt=media&token=6a326b9a-d32f-491f-8bd7-54d10ab3af99'),
+('Mestiço', 'Cândido Portinari', 1934, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/portinarimestico.jpg?alt=media&token=1e6e8b8b-76b0-4fca-bc3f-4a970278a354'),
+('Os Retirantes', 'Cândido Portinari', 1944, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/portinariosretirantes.jpg?alt=media&token=037ef56f-1a00-4d7e-a11e-700ea432818c'),
+('A Cuca', 'Tarsila do Amaral', 1924, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/tarsilaacuca.jpg?alt=media&token=24f1997c-c9fd-49c4-8d16-9e7e3fd2213d'),
+('A Negra', 'Tarsila do Amaral', 1923, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/tarsilaanegra.jpg?alt=media&token=1362eaea-ba5d-4cf0-85e8-2ddc50b7070e'),
+('São Paulo', 'Tarsila do Amaral', 1924, 'https://firebasestorage.googleapis.com/v0/b/museu-virtual-dd512.appspot.com/o/tarsilasaopaulo.jpg?alt=media&token=8f32ed58-73ad-441c-8566-7cfacc7f78ef');
+
+-- Cria a tabela 'comentarios' para armazenar os comentários sobre as obras
+CREATE TABLE `comentarios` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `comentario` TEXT NOT NULL,
+  `idobra` INT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  -- Define a chave estrangeira para relacionar o comentário com a obra de arte
+  FOREIGN KEY (`idobra`) REFERENCES `obrasdearte`(`id`) ON DELETE CASCADE
+);
+
+
+
+SELECT
+    c.comentario
+FROM
+    comentarios c
+INNER JOIN
+    obrasdeartes o ON c.idobra = p.id;
